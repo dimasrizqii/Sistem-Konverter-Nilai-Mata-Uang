@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up | Si KOMANG</title>
+     <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container"  >
+      <div class="row justify-content-center mt-5">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header bg-transparent mb-0"><h5 class="text-center">Silahkan <span class="font-weight-bold text-primary">Sign Up</span></h5></div>
+            <div class="card-body">
+              <form action="">
+                <div class="form-group">
+                  <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama">
+                </div>
+                <br>
+                <div class="form-group">
+                  <input type="text" name="username" id="username" class="form-control" placeholder="Username">
+                </div>
+                <br>
+                <div class="form-group">
+                  <input type="text" name="password" id="password" class="form-control" placeholder="Password">
+                </div>
+               <br> 
+                <div class="form-group">
+                  <button type="button" id="insert" name="submit"  class="btn btn-primary btn-block">Sign Up</button>
+                </div>
+              </form>
+                 <p>Sudah Punya Akun ? <a href="login.html">Masuk Disini</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+   <script src="admin/js/jquery.js"></script> 
+  <script type="text/javascript">
+var db=openDatabase("itemDB","1.0","itemDB",65535); // itemDB is the database name
+
+
+$(function(){
+
+loadData(); //loading our records
+
+function createtable(){
+db.transaction(function(transaction){
+  var sql="CREATE TABLE article "+
+  "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+  "content text NOT NULL,"+
+  "thumbnail text NOT NULL,"+
+  "judul text NOT NULL,"+
+  "author text NOT NULL,"+
+  "created_at text NOT NULL)";
+  transaction.executeSql(sql,undefined,function(){
+    db.transaction(function(transaction){
+  var sql="CREATE TABLE login "+
+  "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+  "nama text NOT NULL,"+
+  "username text NOT NULL,"+
+  "password text NOT NULL)";
+  transaction.executeSql(sql,undefined,function(){
+    alert("Selamat Datang Di Exchanger Money");
+  },function(){
+    
+  })
+});
+  },function(){
+    
+  })
+});
+}
+
+
+//INSERTING DATA INTO TABLE
+
+$("#insert").click(function(){
+var nama=$("#nama");
+var username=$("#username");
+var password=$("#password");
+ if (username.val() == "") {
+    console.log('please enter username');
+    username.focus();
+  } else if (password.val() == "") {
+    console.log('please enter password');
+    passwords.focus();
+  }else if (nama.val() == "") {
+    console.log('please enter nama');
+    nama.focus();
+  }else{
+db.transaction(function(transaction){
+var sql="INSERT INTO login(nama,username,password) VALUES(?,?,?)";
+transaction.executeSql(sql,[nama.val(),username.val(),password.val()],function(){
+  alert("Daftar Berhasil Silahkan Login");
+   window.location.href = "login.html";
+},function(transaction,err){
+  alert(err.message);
+})
+})}
+})
+//INSERTING DATA ENDS HERE
+
+
+//FETCHING OUR RECORD
+$("#list").click(function(){
+loadData();
+})
+
+
+
+//FUNCTION TO LOAD OUR RECORDS
+function loadData(){
+    $("#itemlist").children().remove();
+  db.transaction(function(transaction){
+    var sql="SELECT * FROM login ORDER BY id DESC";
+    transaction.executeSql(sql,undefined,function(transaction,result){
+if(result.rows.length){
+
+for(var i=0;i<result.rows.length;i++){
+  var row=result.rows.item(i);
+
+  $("#itemlist").append('<tr id="del'+row.id+'"><td>'+row.id+'</td><td>'+row.username+'</td><td>'+row.password+'</td><td id="newqty'+row.id+'">'+row.nama+'</td><td><a href="#" class="btn btn-danger deleteitem" data-id="'  +row.id+'">Delete</a> <a href="#" class="btn btn-primary updateitem" data-id="'+row.id+'">Update</a></td></tr>');
+}
+}else{
+  $("#itemlist").append('<tr><td colspan="3" align="center">No Item Found</td></tr>');
+}
+    },function(transaction,err){
+    createtable();
+    })
+  })
+
+
+
+
+//setTimeout was used to execute codes inside it to be loaded after records are loaded/fetched.
+
+setTimeout(function(){
+  $(".deleteitem").click(function(){
+var sure=confirm("Are you sure to delete this item?");
+if(sure===true){
+  var id=$(this).data("id");
+db.transaction(function(transaction){
+var sql="DELETE FROM items where id=?";
+transaction.executeSql(sql,[id],function(){
+  $("#del"+id).fadeOut();
+  alert("Item is deleted successfully");
+},function(transaction,err){
+  alert(err.message);
+})
+});
+}
+})
+
+$(".updateitem").click(function(){
+var qty=prompt("Kindly enter new quantity",1);
+if(qty!==null){
+  var id=$(this).data("id");
+db.transaction(function(transaction){
+var sql="UPDATE items SET quantity=? where id=?";
+transaction.executeSql(sql,[qty,id],function(){
+  $("#newqty"+id).html(qty);
+  alert("Item is updated successfully");
+},function(transaction,err){
+  alert(err.message);
+})
+});
+}
+})
+
+},1000);
+
+
+}
+//END OF loadData() function
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Home | Si KOMANG</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="admin/js/jquery.js"></script> 
+          <script> 
+    $(function(){
+     
+      $("#footer").load("footer.html"); 
+    });
+    </script>
+    <style type="text/css">
+    	.currency-row-outer {
+
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 500px
+ }
+
+ .currency-converter {
+ 	padding: 50px;
+ 	border: 1px solid #00000057;
+     width: 100%;
+     max-width: 480px;
+     text-align: center
+ }
+
+ input,
+ select {
+     color: #363636;
+     font-size: 1rem;
+     height: 2.3em;
+     border-radius: 4px;
+     max-width: 100%;
+     width: calc(100% - 15px);
+     margin: auto;
+     outline: 0;
+     background: #fff;
+     border-color: #dbdbdb;
+     padding-left: 15px;
+     border: 1px solid #00000057;
+     box-shadow: inset 0 0.0625em 0.125em rgb(10 10 10 / 5%);
+     -webkit-appearance: none
+ }
+
+ .field.grid-50-50 {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     grid-gap: 15px
+ }
+
+ .currency-converter .colmun {
+     margin-bottom: 15px
+ }
+
+ select.currency {
+     border-color: #3273dc;
+     width: 100%;
+     height: 100%;
+     cursor: pointer;
+     font-size: 0.6em;
+     max-width: 100%;
+     outline: 0;
+     display: block
+ }
+
+ .currency-converter .select {
+     position: relative;
+     height: 100%
+ }
+
+ h2 {
+     padding-bottom: 30px
+ }
+
+ .currency-converter .select:after {
+     transform: rotate(-45deg);
+     transform-origin: center;
+     content: "";
+     border: 3px solid rgba(0, 0, 0, 0);
+     border-radius: 2px;
+     border-top: 0;
+     border-right: 0;
+     display: block;
+     height: 0.525em;
+     width: 0.700em;
+     z-index: 4;
+     position: absolute;
+     top: 50%;
+     right: 1.125em;
+     margin-top: -0.4375em
+ }
+
+ .select:not(:hover)::after {
+     border-color: #3273dc
+ }
+
+ .select:hover::after {
+     border-color: #363636
+ }
+    </style>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+
+         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="index.html">Si KOMANG</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0" id="menu-log">
+  
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
+                    
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+     
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('https://www.xpressmoney.com/blog/wp-content/uploads/2019/10/5_tips_to_save_money_article_xyz.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1 id="insert">Sistem Konversi Mata Uang</h1>
+                            <span class="subheading" >Pastikan Nilai Tukar Uangmu Disini</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+            	<center><h1>Artikel</h1></center>
+                <div class="col-md-10 col-lg-8 col-xl-7" id="artikel">
+                    <!-- Post preview-->
+                   
+                </div>
+            </div>
+        </div>
+
+        <div id="kurs" style="height: 100vh;
+     width: 100vw;
+     overflow-x: hidden">
+        <div class="currency-row-outer">
+        <div class="currency-converter">
+            <h2>Kalkulator Kurs: Konversi Mata Uang</h2>
+            <div id="kurs">
+            <div class="field grid-50-50">
+                <div class="colmun col-left"> <input type="number" class="form-input" id="number" placeholder="00000" > </div>
+                <div class="colmun col-right">
+                    <div class="select"> <select name="currency" class="currency" id="cur1" onchange="updatevalue()" ></select> </div>
+                </div>
+            </div>
+            <div class="field grid-50-50">
+                <div class="colmun col-left"> <input type="text" class="form-input" id="output" placeholder="00000" > </div>
+                <div class="colmun col-right">
+                    <div class="select"> <select name="currency" id="cur2" class="currency" onchange="updatevalue()" ></select> </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div id="footer"></div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
+<script type="text/javascript">
+//Koneksi Ke database
+var db=openDatabase("itemDB","1.0","itemDB",65535);
+
+$(function(){
+
+loadData(); //memanggil funsi loadData
+cekllogin(); //memanggil fungsi ceklogin
+insert();
+$('#kurs').click(divFunction);
+
+
+function cekllogin(){
+
+	if(sessionStorage.login == 'sudah'){
+		
+                   
+        $("#menu-log").append(' <li class="nav-item dropdown">'+
+          '<a class="nav-link dropdown-toggle  px-lg-3 py-3 py-lg-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">'+
+            sessionStorage.nama+
+         ' </a>'+
+          '<ul class="dropdown-menu" aria-labelledby="navbarDropdown">'+
+            '<li><a class="dropdown-item"  id="logout" href="#">Log Out</a></li>'+
+          '</ul>'+
+        '</li>    ');
+	}else{
+		$("#menu-log").append('<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="login.html">Login</a></li>'+'<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="daftar.html">Sign Up</a></li>');
+	}
+}
+function divFunction(){
+if(sessionStorage.login == 'sudah'){
+		 $("#number").attr("disabled", false);
+		 $("#output").attr("disabled", false);
+		  $("#cur1").attr("disabled", false);
+		   $("#cur2").attr("disabled", false);
+	}else{
+		 $("#number").attr("disabled", true);
+		 $("#output").attr("disabled", true);
+		  $("#cur1").attr("disabled", true);
+		   $("#cur2").attr("disabled", true);
+		alert('Silahkan Login Dulu');
+	}
+} 
+//CREATING TABLE STARTS HERE
+
+function createtable(){
+db.transaction(function(transaction){
+	var sql="CREATE TABLE article "+
+	"(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+	"content text NOT NULL,"+
+	
+	"judul text NOT NULL,"+
+	"author text NOT NULL,"+
+	"created_at text NOT NULL)";
+	transaction.executeSql(sql,undefined,function(){
+		db.transaction(function(transaction){
+	var sql="CREATE TABLE login "+
+	"(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+	"nama text NOT NULL,"+
+	"username text NOT NULL,"+
+	"password text NOT NULL)";
+	transaction.executeSql(sql,undefined,function(){
+
+		db.transaction(function(transaction){
+    var sql="CREATE TABLE admin "+
+    "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+    "nama text NOT NULL,"+
+    "username text NOT NULL,"+
+    "password text NOT NULL)";
+    transaction.executeSql(sql,undefined,function(){
+        db.transaction(function(transaction){
+    var sql="CREATE TABLE pengunjung "+
+    "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+    "jam text NOT NULL)";
+    transaction.executeSql(sql,undefined,function(){
+        db.transaction(function(transaction){
+var sql="INSERT INTO admin(nama,username,password) VALUES(?,?,?)";
+transaction.executeSql(sql,['admin','admin','admin'],function(){
+   
+    db.transaction(function(transaction){
+ var sql="CREATE TABLE log_login "+
+    "(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+    "nama text NOT NULL,jam text NOT NULL)";
+    transaction.executeSql(sql,undefined,function(){
+          alert("Selamat Datang Di Exchanger Money");
+    },function(){
+
+})
+});
+
+
+    
+},function(transaction,err){
+    alert(err.message);
+})
+})
+       
+    },function(){
+        
+    })
+});
+    },function(){
+        
+    })
+});
+	},function(){
+		
+	})
+});
+	},function(){
+		
+	})
+});
+}
+// CREATING TABLE ENDS HERE
+
+
+
+$("#logout").click(function(){
+	sessionStorage.login = "";	
+	  window.location.href = "index.html";
+});
+
+
+
+//INSERTING DATA INTO TABLE
+
+function insert(){
+	var d = new Date();
+	var jam =  d.getHours();
+db.transaction(function(transaction){
+var sql="INSERT INTO pengunjung(jam) VALUES(?)";
+transaction.executeSql(sql,[jam],function(){
+	
+},function(transaction,err){
+	
+})
+})
+}
+//INSERTING DATA ENDS HERE
+
+
+//FETCHING OUR RECORD
+$("#list").click(function(){
+loadData();
+})
+
+
+
+//FUNCTION TO LOAD OUR RECORDS
+function loadData(){
+
+		$("#artikel").children().remove();
+	db.transaction(function(transaction){
+		var sql="SELECT * FROM article ORDER BY id DESC";
+		transaction.executeSql(sql,undefined,function(transaction,result){
+if(result.rows.length){
+
+for(var i=0;i<result.rows.length;i++){
+	var row=result.rows.item(i);
+	var content=row.content;
+	var id=row.id;
+	$("#artikel").append(
+'<hr class="my-4" />'+
+		'<div class="post-preview"><a href="post.html#'+row.judul+'#'+row.content+'">'+
+                            '<h2 class="post-title">'+row.judul+'</h2>'+
+                            '<h3 class="post-subtitle" id="cont">'+row.content+'</h3>'+
+                        '</a>'+
+                       '<p class="post-meta">'+
+                            'Posted by'+
+                            '<a href="#!"> '+row.author+' </a>'+
+                            'on '+row.created_at+''+
+                        '</p>'+
+                   ' </div>'
+                    
+                    );
+}
+$("#cont").find("img").remove();
+$("#cont").each(function(i){
+    len=$(this).text().length;
+    if(len>10)
+    {
+      $(this).text($(this).text().substr(0,50)+'...');
+    }
+  });       
+}else{
+	$("#artikel").append('<tr><td colspan="3" align="center">No Item Found</td></tr>');
+}
+		},function(transaction,err){
+		createtable();
+		})
+	})
+
+
+
+
+//setTimeout was used to execute codes inside it to be loaded after records are loaded/fetched.
+
+
+
+}
+//END OF loadData() function
+
+
+
+
+});
+
+
+
+
+const select = document.querySelectorAll('.currency');
+const number = document.getElementById("number");
+const output = document.getElementById("output");
+
+
+fetch('https://api.frankfurter.app/currencies').then((data) => data.json())
+.then((data) => {
+display(data); // memanggil fungsi
+});
+
+
+function display(data) {
+const entries = Object.entries(data);
+for (var i = 0; i < entries.length; i++) { select[0].innerHTML +=`<option value="${entries[i][0]}">${entries[i][0]} : ${entries[i][1]}</option>`;
+    select[1].innerHTML += `<option value="${entries[i][0]}">${entries[i][0]} : ${entries[i][1]}</option>`;
+    }
+    }
+
+
+
+    function updatevalue() {
+    let currency1 = select[0].value;
+    let currency2 = select[1].value;
+
+    let value = number.value;
+
+
+    if (currency1 != currency2) {
+    convert(currency1, currency2, value);
+    } else {
+    alert("Choose Diffrent Currency");
+    }
+    }
+
+
+    function convert(currency1, currency2, value) {
+    const host = "api.frankfurter.app";
+
+    fetch(`https://${host}/latest?amount=${value}&from=${currency1}&to=${currency2}`)
+    .then((val) => val.json())
+    .then((val) => {
+    console.log(Object.values(val.rates)[0]);
+    output.value = Object.values(val.rates)[0];
+    });
+
+    }
+
+
+
+
+
+</script>

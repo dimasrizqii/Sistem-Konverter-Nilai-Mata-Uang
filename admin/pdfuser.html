@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Print Pdf</title>
+</head>
+<body>
+    <center>
+<table border="2" id="tablee" style="margin-top: 5%" width="100%">
+                                    <thead>
+                                        <tr>
+                                           <th>ID User</th>
+                                            <th>Name</th>
+                                          
+                                         
+                                            <th>Username</th>
+                                            <th>Password</th>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody id="isi">
+                                      
+                                       
+                                    </tbody>
+                                </table>
+                                </center>
+</body>
+ <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+         $(document).ready(function () {
+               
+            });
+    </script>
+
+         <!-- Custom Js -->
+     <script>
+                        CKEDITOR.replace( 'editor1' );
+                </script>
+    <script type="text/javascript">
+        var db=openDatabase("itemDB","1.0","itemDB",65535);
+       
+       
+        
+        $(function(){
+          loadData();   
+            //FUNCTION TO LOAD OUR RECORDS
+
+function loadData(){
+     console.log('test');
+        $("#isi").children().remove();
+    db.transaction(function(transaction){
+        var sql="SELECT * FROM login ORDER BY id DESC";
+        transaction.executeSql(sql,undefined,function(transaction,result){
+if(result.rows.length){
+
+for(var i=0;i<result.rows.length;i++){
+    var row=result.rows.item(i);
+    console.log(row);
+    $("#isi").append(
+'  <tr class="odd gradeX">'+
+                                            '<td>'+row.id+'</td>'+
+                                            '<td>'+row.nama+'</td>'+
+                                           
+                                            
+                                            '<td>'+row.username+'</td>'+
+                                            '<td>'+row.password+'</td>');
+}
+
+window.print();
+}else{
+    $("#isi").append('<tr><td colspan="6" align="center">No Item Found</td></tr>');
+}
+        },function(transaction,err){
+        createtable();
+        })
+    })};
+
+    $("#insert").click(function(){
+    var d = new Date();
+
+var month = d.getMonth()+1;
+var day = d.getDate();
+    created_at =  d.getFullYear() + '/' +
+    (month<10 ? '0' : '') + month + '/' +
+    (day<10 ? '0' : '') + day;
+    var author = 'authornya nanti';
+    var judul = 'article judul';
+    var content='content article';
+db.transaction(function(transaction){
+var sql="INSERT INTO article(content,judul,author,created_at) VALUES(?,?,?,?,?)";
+transaction.executeSql(sql,[content,judul,author,created_at],function(){
+    alert("New item is added successfully");
+},function(transaction,err){
+    alert(err.message);
+})
+})
+})
+//I
+
+setTimeout(function(){
+    $(".deleteitem").click(function(){
+var sure=confirm("Are you sure to delete this item?");
+if(sure===true){
+    var id=$(this).data("id");
+db.transaction(function(transaction){
+var sql="DELETE FROM article where id=?";
+transaction.executeSql(sql,[id],function(){
+    $("#del"+id).fadeOut();
+    alert("Item is deleted successfully");
+    window.location.href = "table.html";
+},function(transaction,err){
+    alert(err.message);
+})
+});
+}
+})
+
+
+
+},1000);    
+
+        });
+</script>
+</html>

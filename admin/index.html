@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+     <script type="text/javascript" src="js/jquery.js"></script>
+        <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+       <script> 
+    $(function(){
+     
+      $("#nav").load("navbar.html"); 
+      $("#sidebar").load("sidebar.html"); 
+    });
+    </script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav id="nav" class="navbar navbar-default top-navbar" role="navigation">
+        	<!-- include navbar -->
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+            <div class="sidebar-collapse" id="sidebar">
+               
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            Dashboard
+                        </h1>
+						<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Library</a></li>
+  <li class="active">Data</li>
+</ol>
+                    </div>
+                </div>
+				
+				
+                <!-- /. ROW  -->
+
+              
+			
+				
+			
+		<div class="row">
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Article</h4>
+						<div class="easypiechart" id="easypiechart-blue" data-percent="100" ><span class="percent" id="article_jml"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>User</h4>
+						<div class="easypiechart" id="easypiechart-orange" data-percent="100" ><span class="percent" id="user_jml"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-body easypiechart-panel">
+						<h4>Admin</h4>
+						<div class="easypiechart" id="easypiechart-teal" data-percent="100" ><span class="percent" id="admin_jml"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+      <div class="col-xs-6 col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-body easypiechart-panel">
+            <h4>User Login</h4>
+            <div class="easypiechart" id="easypiechart-red" data-percent="100" ><span class="percent" id="user_log"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+			
+		</div><!--/.row-->
+			
+				
+                <div class="row">
+                    <div class="panel panel-default">
+                    <div class="panel-body easypiechart-panel">
+                        <h4>Pengunjung setiap jam</h4>
+                    
+                         <canvas id="myChart" style="width:100%;max-width:100%"></canvas>
+                    
+                </div></div>
+
+                   
+
+                </div>
+				
+                <!-- /. ROW  -->
+
+	   
+				
+				
+				
+           
+                <!-- /. ROW  -->
+				<footer><p>All right reserved. Template by: <a href="Kelompok 5">Kelompok 5</a></p></footer>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+
+    <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+	 
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- Morris Chart Js -->
+    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="assets/js/morris/morris.js"></script>
+	
+
+</script>
+	<script src="assets/js/easypiechart.js"></script>
+	<script src="assets/js/easypiechart-data.js"></script>
+	
+	
+    <!-- Custom Js -->
+    
+<script type="text/javascript">
+var xValues = ['00',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23];
+var yValues = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+var mychart = new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: 0, max:16}}],
+    }
+  }
+});
+ var db=openDatabase("itemDB","1.0","itemDB",65535);
+       
+       
+        
+        $(function(){
+            loadgrap();   
+            //FUNCTION TO LOAD OUR RECORDS
+
+            function float2int (value) {
+    return value | 0;
+}
+
+function loadgrap(){
+   
+        
+    db.transaction(function(transaction){
+        var sql="SELECT * FROM pengunjung ORDER BY id DESC";
+        transaction.executeSql(sql,undefined,function(transaction,result){
+if(result.rows.length){
+
+for(var i=0;i<result.rows.length;i++){
+    var row=result.rows.item(i);
+    yValues[float2int(row.jam)] = yValues[float2int(row.jam)]+1 ;
+    mychart.update();
+
+}
+
+}else{
+  
+}
+        },function(transaction,err){
+       
+        })
+    })};
+          loadData();   
+            //FUNCTION TO LOAD OUR RECORDS
+
+function loadData(){
+    if (sessionStorage.admin != 'sudah') {
+             alert('Silahkan Login Dulu');
+      window.location.href = "../admin_login.html";
+    }
+    console.log('test');
+        $("#isi").children().remove();
+    db.transaction(function(transaction){
+        var sql="SELECT COUNT(id) as jumlah FROM article ORDER BY id DESC";
+        var sql2="SELECT COUNT(id) as jumlah FROM login ORDER BY id DESC";
+          var sql3="SELECT COUNT(id) as jumlah FROM admin ORDER BY id DESC";
+          var sql4="SELECT COUNT(id) as jumlah FROM log_login ORDER BY id DESC";
+        transaction.executeSql(sql,undefined,function(transaction,result){
+             transaction.executeSql(sql2,undefined,function(transaction2,result2){
+                transaction.executeSql(sql3,undefined,function(transaction3,result3){
+                  transaction.executeSql(sql4,undefined,function(transaction4,result4){
+                    for(var i=0;i<result3.rows.length;i++){
+    var row=result4.rows.item(i);
+    console.log(row);
+   $("#user_log").append(row['jumlah']);
+}
+             });
+                    for(var i=0;i<result3.rows.length;i++){
+    var row=result3.rows.item(i);
+    console.log(row);
+   $("#admin_jml").append(row['jumlah']);
+}
+             });
+                    for(var i=0;i<result2.rows.length;i++){
+    var row=result2.rows.item(i);
+    console.log(row);
+   $("#user_jml").append(row['jumlah']);
+}
+             });
+if(result.rows.length){
+
+for(var i=0;i<result.rows.length;i++){
+    var row=result.rows.item(i);
+    console.log(row);
+   $("#article_jml").append(row['jumlah']);
+}
+
+
+}else{
+    $("#isi").append('<tr><td colspan="6" align="center">No Item Found</td></tr>');
+}
+
+        },function(transaction,err){
+        
+        })
+    })};
+    
+
+        });
+    </script>
+
+</body>
+
+</html>
